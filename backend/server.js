@@ -11,6 +11,10 @@ const aiRoutes = require('./routes/ai.routes');
 const { sanitizePayload } = require('./middlewares/validation');
 
 const app = express();
+
+// Trust the reverse proxy (required for express-rate-limit on Render)
+app.set('trust proxy', 1);
+
 const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/resumeAI';
 
 const allowedOrigins = process.env.CLIENT_URL
